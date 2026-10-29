@@ -2,3 +2,249 @@
 @media(max-width:950px){.main-nav{gap:17px}.hero-grid{gap:28px;min-height:490px}.hero-visual{height:340px}.trust-item{padding:4px 8px}.about-grid{gap:40px}.contact-section{gap:40px}.product-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:650px){.container{width:calc(100% - 36px)}.announcement-inner{height:31px;font-size:10px}.announcement-inner span:last-child{display:none}.site-header{height:72px}.brand-icon{width:41px;height:41px;border-radius:13px}.brand-copy strong{font-size:16px}.brand-copy small{font-size:11px}.main-nav{display:none;position:absolute;top:71px;left:0;right:0;padding:12px 22px 18px;background:#fffdf8;border-bottom:1px solid #e6ebdf;box-shadow:0 12px 20px #183d2810;flex-direction:column;align-items:stretch;gap:0}.main-nav.nav-open{display:flex}.main-nav a{padding:12px 0;border-bottom:1px solid #edf0e8}.main-nav a:last-child{border:0}.cart-trigger{padding:8px 9px;gap:6px}.cart-trigger span{font-size:12px}.mobile-menu{display:grid;place-items:center}.hero-grid{grid-template-columns:1fr;gap:28px;padding-top:42px;padding-bottom:34px}.hero h1{font-size:43px;letter-spacing:-.7px}.hero-copy>p{font-size:13px}.hero-visual{height:270px;border-radius:20px}.hero-sticker{left:12px;bottom:12px;padding:9px 11px}.hero-side-note{top:12px;right:12px}.hero-bg-shape{width:300px;height:300px;right:-160px;top:30px}.hero-trust{gap:13px}.trust-bar{grid-template-columns:1fr;margin-top:18px;margin-bottom:52px;padding:10px 15px;gap:0}.trust-item{border-right:0;border-bottom:1px solid var(--line);padding:12px 2px}.trust-item:last-child{border-bottom:0}.trust-item>span{width:39px;height:39px}.products-section{padding-bottom:55px}.section-head{align-items:start}.section-head h2,.contact-intro h2{font-size:27px}.section-head p{font-size:12px}.result-count{font-size:10px;padding:7px 8px}.catalog-tools{margin:21px 0}.category-filters{gap:7px}.category-button{padding:8px 10px;font-size:11px}.product-grid{gap:12px}.product-image-button{height:135px}.product-info{padding:12px}.product-info h3{font-size:15px;margin-top:9px}.product-variety{font-size:10px;line-height:1.5;min-height:28px}.product-description{font-size:11px;line-height:1.7;min-height:60px}.product-meta{font-size:9px}.product-footer{padding-top:11px;margin-top:11px;align-items:center}.price-block strong{font-size:16px}.price-block small{font-size:10px}.price-block>span{font-size:9px}.add-button{padding:9px;width:34px;height:34px;justify-content:center}.add-button span{display:none}.price-disclaimer{font-size:11px}.about-section{padding:45px 0}.about-grid{grid-template-columns:1fr;gap:26px}.about-photo{height:230px}.about-copy h2{font-size:31px}.about-copy>p{font-size:13px}.contact-section{grid-template-columns:1fr;gap:24px;padding-top:53px;padding-bottom:55px}.contact-card{padding:19px}.footer-top{align-items:flex-start;flex-direction:column}.footer-links{gap:15px}.footer-bottom{flex-direction:column;gap:7px;font-size:10px}.cart-panel{padding:19px}.product-detail-modal{grid-template-columns:1fr;max-height:92vh}.product-detail-modal>img{height:200px;min-height:200px}.detail-content{padding:22px}.detail-content h2{font-size:25px}.detail-actions .button{flex:1;font-size:12px;padding:11px 10px}.detail-spec{gap:8px}}
 @media(max-width:380px){.product-grid{grid-template-columns:1fr}.product-image-button{height:190px}.product-description{min-height:0}.hero h1{font-size:38px}.hero-buttons .button{padding:11px 13px;font-size:12px}}
+
+
+
+.weather-section {
+    padding: 76px 0;
+    background: #f2f8f0;
+  }
+  
+  .weather-heading {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+  
+  .weather-heading h2 {
+    margin: 12px 0;
+    font-size: clamp(27px, 4vw, 38px);
+    color: #193c28;
+  }
+  
+  .weather-heading p {
+    color: #627267;
+  }
+  
+  .weather-current {
+    padding: 28px;
+    background: white;
+    border: 1px solid #e1ebdf;
+    border-radius: 22px;
+    box-shadow: 0 8px 28px rgba(32, 76, 42, 0.06);
+  }
+  
+  .weather-current-main {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  
+  .weather-location {
+    color: #47734e;
+    font-size: 14px;
+  }
+  
+  .weather-current-main h3 {
+    margin: 12px 0 5px;
+    font-size: 24px;
+  }
+  
+  .weather-current-main p {
+    margin: 0;
+    color: #647267;
+  }
+  
+  .weather-current-main > svg {
+    color: #dc9b29;
+  }
+  
+  .weather-temperature {
+    font-size: 52px;
+    font-weight: 750;
+    color: #244c31;
+  }
+  
+  .weather-temperature small {
+    display: block;
+    font-size: 12px;
+    font-weight: 400;
+    color: #6c7a70;
+  }
+  
+  .weather-stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: 26px;
+    padding-top: 22px;
+    border-top: 1px solid #e7eee5;
+  }
+  
+  .weather-stats > div {
+    display: grid;
+    gap: 7px;
+    color: #507451;
+  }
+  
+  .weather-stats span {
+    font-size: 13px;
+    color: #647267;
+  }
+  
+  .weather-stats strong {
+    color: #233d2b;
+    font-size: 16px;
+  }
+  
+  .forecast-title {
+    margin: 32px 0 16px;
+    color: #193c28;
+    font-size: 22px;
+  }
+  
+  .forecast-grid {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 12px;
+  }
+  
+  .forecast-card {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 12px;
+    min-width: 0;
+    padding: 18px 8px;
+    border-radius: 16px;
+    border: 1px solid #e1ebdf;
+    background: white;
+    text-align: center;
+  }
+  
+  .forecast-card > svg {
+    color: #d69a2e;
+  }
+  
+  .forecast-condition {
+    min-height: 34px;
+    font-size: 12px;
+    color: #637166;
+  }
+  
+  .forecast-temperatures {
+    display: flex;
+    gap: 9px;
+  }
+  
+  .forecast-temperatures b {
+    color: #243f2b;
+  }
+  
+  .forecast-temperatures span {
+    color: #7a887d;
+  }
+  
+  .forecast-rain {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: #387fb4;
+    font-size: 13px;
+  }
+  
+  .forecast-card small {
+    font-size: 10px;
+    color: #718075;
+  }
+  
+  .weather-advice {
+    display: flex;
+    gap: 14px;
+    margin-top: 24px;
+    padding: 20px;
+    border-radius: 16px;
+    background: #e5f1df;
+    color: #2c6138;
+  }
+  
+  .weather-advice > svg {
+    flex-shrink: 0;
+  }
+  
+  .weather-advice p {
+    margin: 8px 0 0;
+    line-height: 1.7;
+    font-size: 14px;
+    color: #47634c;
+  }
+  
+  .weather-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 18px;
+    color: #6a786c;
+    font-size: 12px;
+  }
+  
+  .weather-refresh {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 10px 14px;
+    border: 1px solid #cddfca;
+    border-radius: 10px;
+    background: white;
+    color: #285b35;
+    cursor: pointer;
+  }
+  
+  .weather-message {
+    padding: 24px;
+    text-align: center;
+    border-radius: 16px;
+    background: white;
+  }
+  
+  @media (max-width: 900px) {
+    .forecast-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+  
+  @media (max-width: 560px) {
+    .weather-section {
+      padding: 48px 0;
+    }
+  
+    .weather-current {
+      padding: 20px;
+    }
+  
+    .weather-current-main {
+      gap: 14px;
+    }
+  
+    .weather-temperature {
+      width: 100%;
+      font-size: 44px;
+    }
+  
+    .weather-stats {
+      grid-template-columns: 1fr;
+    }
+  
+    .weather-stats > div {
+      grid-template-columns: 25px 1fr auto;
+      align-items: center;
+    }
+  
+    .forecast-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  

@@ -5,6 +5,7 @@ import {
 } from 'lucide-react';
 import { categories, products } from './data/products.js';
 import { shop } from './config/shop.js';
+import WeatherSection from './components/WeatherSection.jsx';
 
 const formatPrice = (amount) => new Intl.NumberFormat('hi-IN', {
   style: 'currency', currency: 'INR', maximumFractionDigits: 0
@@ -170,6 +171,9 @@ export default function App() {
           </div>
           {visibleProducts.length === 0 && <div className="no-results"><Search size={28}/><strong>कोई उत्पाद नहीं मिला</strong><span>किसी दूसरे नाम से खोजें या दूसरी श्रेणी चुनें।</span><button onClick={() => {setSearch('');setActiveCategory('all');}}>सभी उत्पाद दिखाएँ</button></div>}
           <p className="price-disclaimer">महत्वपूर्ण: वेबसाइट पर दिखाई गई कीमतें नमूने के लिए हैं। इन्हें वास्तविक दुकान की कीमतें न मानें। किस्म, पैक, स्टॉक और अंतिम कीमत की पुष्टि दुकान से करें।</p>
+
+          <WeatherSection />
+          
         </section>
 
         <section className="about-section" id="about">
@@ -178,6 +182,7 @@ export default function App() {
             <div className="about-copy"><span className="section-kicker">हमारे बारे में</span><h2>खेती के सफ़र में<br/><em>आपका साथी।</em></h2><p>शुक्ला बीज भंडार की यह वेबसाइट ग्राहकों को बीज और कृषि उत्पादों की जानकारी आसानी से देने के लिए बनाई गई है। आप उत्पादों को देख सकते हैं, कार्ट बना सकते हैं और दुकान से उपलब्धता व कीमत पूछ सकते हैं।</p><p>दुकान का पता, वास्तविक ब्रांड, प्रमाणित किस्में और उपलब्ध स्टॉक मिलने के बाद इस जानकारी को अपडेट किया जा सकता है।</p><a href="#contact" className="text-link">संपर्क जानकारी देखें <ArrowRight size={17}/></a></div>
           </div>
         </section>
+        
 
         <section className="contact-section container" id="contact">
           <div className="contact-intro"><span className="section-kicker">संपर्क करें</span><h2>आपकी खेती, हमारी प्राथमिकता।</h2><p>किसी उत्पाद की कीमत, उपलब्धता या पैक के बारे में जानना है? दुकान की जानकारी अपडेट होने पर यहाँ से संपर्क कर सकेंगे।</p><div className="contact-points"><span><MessageCircle size={18}/> WhatsApp पूछताछ</span><span><Phone size={18}/> फोन पर जानकारी</span></div></div>
@@ -186,6 +191,7 @@ export default function App() {
             <div className="contact-detail"><MapPin size={18}/><div><strong>पता</strong><span>{shop.address}</span></div></div>
             <div className="contact-detail"><Phone size={18}/><div><strong>फोन नंबर</strong><span>{shop.phone || 'नंबर जल्द जोड़ा जाएगा'}</span></div></div>
             <div className="contact-detail"><Clock size={18}/><div><strong>दुकान का समय</strong><span>{shop.hours}</span></div></div>
+            <div className="contact-detail"><Clock size={18}/><div><strong>विक्रेता का नाम</strong><span>{shop.sellerName}</span></div></div>
             <a className="button button-primary contact-button" href="#products">उत्पाद देखें <ArrowRight size={17}/></a>
           </div>
         </section>
