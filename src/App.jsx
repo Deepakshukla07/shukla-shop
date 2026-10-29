@@ -1,5 +1,4 @@
-
-import { useMemo, useState } from 'react';
+import { useMemo, useState } from "react";
 import {
   Sprout,
   Search,
@@ -17,18 +16,18 @@ import {
   Wheat,
   ShieldCheck,
   MessageCircle,
-  CloudSun
-} from 'lucide-react';
+  CloudSun,
+} from "lucide-react";
 
-import { categories, products } from './data/products.js';
-import { shop } from './config/shop.js';
-import WeatherSection from './components/WeatherSection.jsx';
+import { categories, products } from "./data/products.js";
+import { shop } from "./config/shop.js";
+import WeatherSection from "./components/WeatherSection.jsx";
 
 const formatPrice = (amount) =>
-  new Intl.NumberFormat('hi-IN', {
-    style: 'currency',
-    currency: 'INR',
-    maximumFractionDigits: 0
+  new Intl.NumberFormat("hi-IN", {
+    style: "currency",
+    currency: "INR",
+    maximumFractionDigits: 0,
   }).format(amount);
 
 function ProductCard({ product, onAdd, onDetails }) {
@@ -45,7 +44,7 @@ function ProductCard({ product, onAdd, onDetails }) {
           loading="lazy"
           onError={(e) => {
             e.currentTarget.src =
-              'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=900&q=80';
+              "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=900&q=80";
           }}
         />
 
@@ -90,8 +89,8 @@ function ProductCard({ product, onAdd, onDetails }) {
 }
 
 export default function App() {
-  const [search, setSearch] = useState('');
-  const [activeCategory, setActiveCategory] = useState('all');
+  const [search, setSearch] = useState("");
+  const [activeCategory, setActiveCategory] = useState("all");
   const [cart, setCart] = useState({});
   const [cartOpen, setCartOpen] = useState(false);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
@@ -101,14 +100,14 @@ export default function App() {
     () =>
       products.filter((p) => {
         const matchesCategory =
-          activeCategory === 'all' || p.category === activeCategory;
+          activeCategory === "all" || p.category === activeCategory;
 
-        const q = search.trim().toLocaleLowerCase('hi');
+        const q = search.trim().toLocaleLowerCase("hi");
 
         const matchesSearch =
           !q ||
           `${p.name} ${p.variety} ${p.categoryLabel} ${p.description}`
-            .toLocaleLowerCase('hi')
+            .toLocaleLowerCase("hi")
             .includes(q);
 
         return matchesCategory && matchesSearch;
@@ -120,20 +119,14 @@ export default function App() {
     .filter((p) => (cart[p.id] || 0) > 0)
     .map((p) => ({ ...p, quantity: cart[p.id] }));
 
-  const cartCount = cartItems.reduce(
-    (sum, p) => sum + p.quantity,
-    0
-  );
+  const cartCount = cartItems.reduce((sum, p) => sum + p.quantity, 0);
 
-  const cartTotal = cartItems.reduce(
-    (sum, p) => sum + p.quantity * p.price,
-    0
-  );
+  const cartTotal = cartItems.reduce((sum, p) => sum + p.quantity * p.price, 0);
 
   const updateQuantity = (id, quantity) => {
     setCart((current) => ({
       ...current,
-      [id]: Math.max(0, quantity)
+      [id]: Math.max(0, quantity),
     }));
   };
 
@@ -148,57 +141,65 @@ export default function App() {
   const buildWhatsAppMessage = () => {
     const lines = cartItems.map(
       (p) =>
-        `• ${p.name}: ${p.quantity} ${p.unit} × ${formatPrice(p.price)} = ${formatPrice(p.quantity * p.price)}`
+        `• ${p.name}: ${p.quantity} ${p.unit} × ${formatPrice(
+          p.price
+        )} = ${formatPrice(p.quantity * p.price)}`
     );
 
     return [
       `नमस्ते ${shop.name} जी,`,
-      'मुझे नीचे दिए गए उत्पादों के बारे में ऑर्डर/उपलब्धता पूछनी है:',
+      "मुझे नीचे दिए गए उत्पादों के बारे में ऑर्डर/उपलब्धता पूछनी है:",
       ...lines,
       `कुल अनुमानित राशि: ${formatPrice(cartTotal)}`,
-      'कृपया स्टॉक, वास्तविक कीमत और डिलीवरी की पुष्टि करें।',
-      'नाम:',
-      'पता:'
-    ].join('\n');
+      "कृपया स्टॉक, वास्तविक कीमत और डिलीवरी की पुष्टि करें।",
+      "नाम:",
+      "पता:",
+    ].join("\n");
   };
 
   const sendWhatsApp = () => {
     if (!cartItems.length) {
-      alert('पहले कार्ट में उत्पाद जोड़ें।');
+      alert("पहले कार्ट में उत्पाद जोड़ें।");
       return;
     }
 
     if (!shop.whatsappNumber) {
       alert(
-        'WhatsApp ऑर्डर चालू करने के लिए src/config/shop.js में whatsappNumber भरें।'
+        "WhatsApp ऑर्डर चालू करने के लिए src/config/shop.js में whatsappNumber भरें।"
       );
       return;
     }
 
     window.open(
-      `https://wa.me/${shop.whatsappNumber}?text=${encodeURIComponent(buildWhatsAppMessage())}`,
-      '_blank',
-      'noopener,noreferrer'
+      `https://wa.me/${shop.whatsappNumber}?text=${encodeURIComponent(
+        buildWhatsAppMessage()
+      )}`,
+      "_blank",
+      "noopener,noreferrer"
     );
   };
 
   const askAboutProduct = (product) => {
     if (!shop.whatsappNumber) {
       alert(
-        'WhatsApp संपर्क चालू करने के लिए src/config/shop.js में whatsappNumber भरें।'
+        "WhatsApp संपर्क चालू करने के लिए src/config/shop.js में whatsappNumber भरें।"
       );
       return;
     }
 
     const message =
       `नमस्ते ${shop.name} जी, मुझे ${product.name} (${product.variety}) के बारे में जानकारी चाहिए। ` +
-      `वेबसाइट पर दिखाई गई कीमत ${formatPrice(product.price)} / ${product.unit} केवल डेमो है। ` +
-      'कृपया वास्तविक कीमत और उपलब्धता बताएं।';
+      `वेबसाइट पर दिखाई गई कीमत ${formatPrice(product.price)} / ${
+        product.unit
+      } केवल डेमो है। ` +
+      "कृपया वास्तविक कीमत और उपलब्धता बताएं।";
 
     window.open(
-      `https://wa.me/${shop.whatsappNumber}?text=${encodeURIComponent(message)}`,
-      '_blank',
-      'noopener,noreferrer'
+      `https://wa.me/${shop.whatsappNumber}?text=${encodeURIComponent(
+        message
+      )}`,
+      "_blank",
+      "noopener,noreferrer"
     );
   };
 
@@ -223,21 +224,19 @@ export default function App() {
             aria-label="शुक्ला बीज भंडार मुखपृष्ठ"
             onClick={closeMobileNav}
           >
-            <span className="brand-icon">
-              <Sprout size={30} />
-            </span>
+            <img
+              src="/logo.png"
+              alt="शुक्ला बीज भंडार का लोगो"
+              className="brand-logo-image"
+            />
 
             <span className="brand-copy">
               <strong>{shop.name}</strong>
-              <small>किसानों का भरोसा</small>
+              <small>अच्छे बीज • अच्छी फसल • समृद्ध किसान</small>
             </span>
           </a>
 
-          <nav
-            className={
-              mobileNavOpen ? 'main-nav nav-open' : 'main-nav'
-            }
-          >
+          <nav className={mobileNavOpen ? "main-nav nav-open" : "main-nav"}>
             <a href="#home" onClick={closeMobileNav}>
               मुखपृष्ठ
             </a>
@@ -302,9 +301,9 @@ export default function App() {
               </h1>
 
               <p>
-                शुक्ला बीज भंडार में आपका स्वागत है। गेहूँ, धान,
-                मक्का, सरसों और सब्ज़ियों के बीजों के विकल्प देखें।
-                सही किस्म और उपलब्धता की पुष्टि दुकान से करें।
+                शुक्ला बीज भंडार में आपका स्वागत है। गेहूँ, धान, मक्का, सरसों और
+                सब्ज़ियों के बीजों के विकल्प देखें। सही किस्म और उपलब्धता की
+                पुष्टि दुकान से करें।
               </p>
 
               <div className="hero-buttons">
@@ -356,7 +355,9 @@ export default function App() {
         {/* Trust bar */}
         <section className="trust-bar container" aria-label="हमारी सेवाएँ">
           <div className="trust-item">
-            <span><Sprout size={22} /></span>
+            <span>
+              <Sprout size={22} />
+            </span>
             <div>
               <strong>फसल के अनुसार विकल्प</strong>
               <small>अलग-अलग बीज श्रेणियाँ</small>
@@ -364,7 +365,9 @@ export default function App() {
           </div>
 
           <div className="trust-item">
-            <span><ShoppingCart size={22} /></span>
+            <span>
+              <ShoppingCart size={22} />
+            </span>
             <div>
               <strong>आसान चयन</strong>
               <small>कार्ट में उत्पाद जोड़ें</small>
@@ -372,7 +375,9 @@ export default function App() {
           </div>
 
           <div className="trust-item">
-            <span><MessageCircle size={22} /></span>
+            <span>
+              <MessageCircle size={22} />
+            </span>
             <div>
               <strong>सीधी पूछताछ</strong>
               <small>WhatsApp से संपर्क</small>
@@ -387,8 +392,7 @@ export default function App() {
               <span className="section-kicker">हमारे उत्पाद</span>
               <h2>अपनी ज़रूरत का उत्पाद चुनें</h2>
               <p>
-                उत्पादों की जानकारी नीचे देखें और उपलब्धता के लिए
-                पूछताछ करें।
+                उत्पादों की जानकारी नीचे देखें और उपलब्धता के लिए पूछताछ करें।
               </p>
             </div>
 
@@ -414,8 +418,8 @@ export default function App() {
                   key={c.id}
                   className={
                     activeCategory === c.id
-                      ? 'category-button active'
-                      : 'category-button'
+                      ? "category-button active"
+                      : "category-button"
                   }
                   onClick={() => setActiveCategory(c.id)}
                 >
@@ -440,13 +444,11 @@ export default function App() {
             <div className="no-results">
               <Search size={28} />
               <strong>कोई उत्पाद नहीं मिला</strong>
-              <span>
-                किसी दूसरे नाम से खोजें या दूसरी श्रेणी चुनें।
-              </span>
+              <span>किसी दूसरे नाम से खोजें या दूसरी श्रेणी चुनें।</span>
               <button
                 onClick={() => {
-                  setSearch('');
-                  setActiveCategory('all');
+                  setSearch("");
+                  setActiveCategory("all");
                 }}
               >
                 सभी उत्पाद दिखाएँ
@@ -455,9 +457,9 @@ export default function App() {
           )}
 
           <p className="price-disclaimer">
-            महत्वपूर्ण: वेबसाइट पर दिखाई गई कीमतें नमूने के लिए हैं।
-            इन्हें वास्तविक दुकान की कीमतें न मानें। किस्म, पैक,
-            स्टॉक और अंतिम कीमत की पुष्टि दुकान से करें।
+            महत्वपूर्ण: वेबसाइट पर दिखाई गई कीमतें नमूने के लिए हैं। इन्हें
+            वास्तविक दुकान की कीमतें न मानें। किस्म, पैक, स्टॉक और अंतिम कीमत की
+            पुष्टि दुकान से करें।
           </p>
         </section>
 
@@ -476,7 +478,7 @@ export default function App() {
                 loading="lazy"
                 onError={(e) => {
                   e.currentTarget.src =
-                    'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1000&q=85';
+                    "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1000&q=85";
                 }}
               />
 
@@ -494,16 +496,15 @@ export default function App() {
               </h2>
 
               <p>
-                शुक्ला बीज भंडार की यह वेबसाइट ग्राहकों को बीज और
-                कृषि उत्पादों की जानकारी आसानी से देने के लिए बनाई
-                गई है। आप उत्पादों को देख सकते हैं, कार्ट बना सकते
-                हैं और दुकान से उपलब्धता व कीमत पूछ सकते हैं।
+                शुक्ला बीज भंडार की यह वेबसाइट ग्राहकों को बीज और कृषि उत्पादों
+                की जानकारी आसानी से देने के लिए बनाई गई है। आप उत्पादों को देख
+                सकते हैं, कार्ट बना सकते हैं और दुकान से उपलब्धता व कीमत पूछ
+                सकते हैं।
               </p>
 
               <p>
-                दुकान का पता, वास्तविक ब्रांड, प्रमाणित किस्में और
-                उपलब्ध स्टॉक मिलने के बाद इस जानकारी को अपडेट किया
-                जा सकता है।
+                दुकान का पता, वास्तविक ब्रांड, प्रमाणित किस्में और उपलब्ध स्टॉक
+                मिलने के बाद इस जानकारी को अपडेट किया जा सकता है।
               </p>
 
               <a href="#contact" className="text-link">
@@ -520,14 +521,17 @@ export default function App() {
             <h2>आपकी खेती, हमारी प्राथमिकता।</h2>
 
             <p>
-              किसी उत्पाद की कीमत, उपलब्धता या पैक के बारे में
-              जानना है? दुकान की जानकारी अपडेट होने पर यहाँ से
-              संपर्क कर सकेंगे।
+              किसी उत्पाद की कीमत, उपलब्धता या पैक के बारे में जानना है? दुकान
+              की जानकारी अपडेट होने पर यहाँ से संपर्क कर सकेंगे।
             </p>
 
             <div className="contact-points">
-              <span><MessageCircle size={18} /> WhatsApp पूछताछ</span>
-              <span><Phone size={18} /> फोन पर जानकारी</span>
+              <span>
+                <MessageCircle size={18} /> WhatsApp पूछताछ
+              </span>
+              <span>
+                <Phone size={18} /> फोन पर जानकारी
+              </span>
             </div>
           </div>
 
@@ -554,7 +558,7 @@ export default function App() {
               <Phone size={18} />
               <div>
                 <strong>फोन नंबर</strong>
-                <span>{shop.phone || 'नंबर जल्द जोड़ा जाएगा'}</span>
+                <span>{shop.phone || "नंबर जल्द जोड़ा जाएगा"}</span>
               </div>
             </div>
 
@@ -588,9 +592,12 @@ export default function App() {
       <footer className="footer">
         <div className="container footer-top">
           <a href="#home" className="brand footer-brand">
-            <span className="brand-icon">
-              <Sprout size={27} />
-            </span>
+            <img
+              src="/logo.png"
+              alt="शुक्ला बीज भंडार का लोगो"
+              className="brand-logo-image"
+            />
+
             <span className="brand-copy">
               <strong>{shop.name}</strong>
               <small>किसानों का भरोसा</small>
@@ -642,7 +649,9 @@ export default function App() {
 
             {cartItems.length === 0 ? (
               <div className="empty-cart">
-                <span><ShoppingCart size={35} /></span>
+                <span>
+                  <ShoppingCart size={35} />
+                </span>
                 <h3>आपका कार्ट खाली है</h3>
                 <p>उत्पादों में से अपनी ज़रूरत की चीज़ें चुनें।</p>
 
@@ -650,8 +659,8 @@ export default function App() {
                   className="button button-primary"
                   onClick={() => {
                     setCartOpen(false);
-                    document.getElementById('products')?.scrollIntoView({
-                      behavior: 'smooth'
+                    document.getElementById("products")?.scrollIntoView({
+                      behavior: "smooth",
                     });
                   }}
                 >
@@ -673,9 +682,7 @@ export default function App() {
 
                         <div className="quantity-control">
                           <button
-                            onClick={() =>
-                              updateQuantity(p.id, p.quantity - 1)
-                            }
+                            onClick={() => updateQuantity(p.id, p.quantity - 1)}
                             aria-label="मात्रा घटाएँ"
                           >
                             <Minus size={13} />
@@ -684,9 +691,7 @@ export default function App() {
                           <span>{p.quantity}</span>
 
                           <button
-                            onClick={() =>
-                              updateQuantity(p.id, p.quantity + 1)
-                            }
+                            onClick={() => updateQuantity(p.id, p.quantity + 1)}
                             aria-label="मात्रा बढ़ाएँ"
                           >
                             <Plus size={13} />
@@ -695,9 +700,7 @@ export default function App() {
                       </div>
 
                       <div className="cart-row-end">
-                        <strong>
-                          {formatPrice(p.price * p.quantity)}
-                        </strong>
+                        <strong>{formatPrice(p.price * p.quantity)}</strong>
 
                         <button
                           className="remove-item"
@@ -729,8 +732,8 @@ export default function App() {
                 </button>
 
                 <p className="checkout-note">
-                  WhatsApp खुलने पर संदेश जाँचकर खुद भेजें।
-                  अभी वेबसाइट ऑर्डर या भुगतान सेव नहीं करती।
+                  WhatsApp खुलने पर संदेश जाँचकर खुद भेजें। अभी वेबसाइट ऑर्डर या
+                  भुगतान सेव नहीं करती।
                 </p>
               </>
             )}
@@ -762,10 +765,7 @@ export default function App() {
               <X />
             </button>
 
-            <img
-              src={selectedProduct.image}
-              alt={selectedProduct.imageAlt}
-            />
+            <img src={selectedProduct.image} alt={selectedProduct.imageAlt} />
 
             <div className="detail-content">
               <span className="section-kicker">
@@ -789,9 +789,7 @@ export default function App() {
 
                 <div>
                   <small>पैक विकल्प</small>
-                  <strong>
-                    {selectedProduct.packOptions.join(', ')}
-                  </strong>
+                  <strong>{selectedProduct.packOptions.join(", ")}</strong>
                 </div>
               </div>
 
@@ -803,8 +801,7 @@ export default function App() {
               </div>
 
               <p className="detail-disclaimer">
-                वास्तविक किस्म, पैक, उपलब्धता और कीमत दुकान से
-                सत्यापित करें।
+                वास्तविक किस्म, पैक, उपलब्धता और कीमत दुकान से सत्यापित करें।
               </p>
 
               <div className="detail-actions">
