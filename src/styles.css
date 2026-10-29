@@ -248,3 +248,13 @@
     }
   }
   
+
+  
+html {
+    scroll-behavior: smooth;
+  }
+  
+  #weather {
+    scroll-margin-top: 100px;
+  }
+  
